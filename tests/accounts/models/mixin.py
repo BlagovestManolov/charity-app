@@ -1,4 +1,4 @@
-from charity_app.accounts.models import CharityUserProfile, CharityUser
+from charity_app.accounts.models import CharityUserProfile, CharityUser, OrganizationUserProfile
 
 
 class CreateProfileObjectsMixin:
@@ -53,3 +53,4 @@ class CreateProfileObjectsMixin:
             user_id=self._create_user_with_valid_values().pk,
             **self.VALID_PROFILE_USER_DATA,
         )
+

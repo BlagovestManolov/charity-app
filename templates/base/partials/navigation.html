@@ -1,0 +1,48 @@
+<header id="fh5co-header-section" class="sticky-banner">
+				<div class="container">
+					<div class="nav-header">
+						<a href="{% url 'index' %}" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+						<h1 id="fh5co-logo"><a href="{% url 'index' %}">Childhood love</a></h1>
+						<!-- START #fh5co-menu-wrap -->
+						<nav id="fh5co-menu-wrap" role="navigation">
+							<ul class="sf-menu" id="fh5co-primary-menu">
+								<li class="active">
+									<a href="{% url 'index' %}">Home</a>
+								</li>
+                                {% if not request.user.is_authenticated %}
+								<li>
+									<a href="{% url 'get-involved' %}" class="fh5co-sub-ddown">Get Involved</a>
+								</li>
+                                {% endif %}
+								<li>
+									<a href="{% url 'projects-list' %}" class="fh5co-sub-ddown">Projects</a>
+								</li>
+								<li><a href="{% url 'about' %}">About</a></li>
+								<li><a href="{% url 'blog-list' %}">Blog</a></li>
+								<li><a href="{% url 'contact' %}">Contact</a></li>
+
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.is_superuser %}
+                                        <li><a href="{% url 'messages-superuser' %}">Messages</a></li>
+                                    {% else %}
+                                        {% if request.user.user_type == 'U' %}
+                                        {% if user.charityuserprofile.first_name %}
+                                            <li><a href="{% url 'profile-finish-user' request.user.pk%}">Profile</a></li>
+                                        {% else %}
+                                            <li><a href="{% url 'profile-user' request.user.pk%}">Profile</a></li>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if user.organizationuserprofile.name %}
+                                            <li><a href="{% url 'organization-finish-user' request.user.pk%}">Organization</a></li>
+                                        {% else %}
+                                            <li><a href="{% url 'organization-user' request.user.pk%}">Organization</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% endif %}
+                                    <li><a href="{% url 'logout-user' %}">Logout</a></li>
+                                {% endif %}
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
